@@ -20,7 +20,7 @@ def addGifts():
 def writeLetter(gifts):
     letterList = {}
     for person in gifts:
-        letter = (f'\nDear {person},\n\n            Thanks so much for the {gifts[person]}. It really does mean a lot.')
+        letter = (f'\nDear {person},\n\n            Thanks so much for your thoughtful graduation gift. The {gifts[person]}really does mean a lot.')
         if gifts[person] == ('money' or 'Money'):
             letter = letter + randomCashJoke()
         letter = letter + " Thank you also for your prayers and support as I made my way through High School, it made more of a difference than you could know. I'm super excited for this next chapter in my life, and will keep you updated as to when I make it big in the world of computer science. \n\n                                                                                                                   Sincerely, Aiden\n"
