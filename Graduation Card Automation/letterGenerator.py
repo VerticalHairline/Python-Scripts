@@ -3,12 +3,12 @@
 import os
 import random
 
-textFile = 'senders.txt'
+textFile = '\senders.txt'
 
 def addGifts():
     gifts = {}
 
-    file = open(os.getcwd() + "\\Graduation Card Automation\\" + textFile)
+    file = open(os.getcwd() + textFile)
 
     giftsList = file.readlines()
 
@@ -20,10 +20,10 @@ def addGifts():
 def writeLetter(gifts):
     letterList = {}
     for person in gifts:
-        letter = (f'Dear {person}, Thanks so much for the {gifts[person]}. It really does mean a lot.')
+        letter = (f'\nDear {person},\n\n            Thanks so much for the {gifts[person]}. It really does mean a lot.')
         if gifts[person] == ('money' or 'Money'):
             letter = letter + randomCashJoke()
-        letter = letter + " Thank you also for your prayers and support as I made my way through High School, it made more of a difference than you could know. I'm super excited for this next chapter in my life, and will keep you updated when I make it big in the world of computer science. Sincerily, Aiden"
+        letter = letter + " Thank you also for your prayers and support as I made my way through High School, it made more of a difference than you could know. I'm super excited for this next chapter in my life, and will keep you updated as to when I make it big in the world of computer science. \n\n                                                                                                                   Sincerely, Aiden\n"
 
         letterList[person] = letter
     
@@ -36,13 +36,15 @@ def randomCashJoke():
         case 1:
             return " The cash you sent will go towards many bowls of ramen, I'm sure."
         case 2:
-            return " The money you sent will be used wisely, probably on many cups of coffe."
+            return " The money you sent will be used wisely, probably on many cups of coffee."
         case 3:
             return " The cash you sent will be very helpful; I'll be broke as, well, a college student."
 
 letterList = writeLetter(addGifts())
+api_message = list(letterList.values())
 
-while True:
+
+'''while True:
     person = input("Whose letter do you want to write? (type 'any' for a random one and 'amount' to see amount remaining)")
 
     if person == 'amount':
@@ -87,4 +89,4 @@ while True:
 
     if person != 'any' and person != 'amount':
         if letterList[person] != 'written' and person not in letterList:
-            print(f'please enter a valid person name, check the {textFile} file for exact syntax')
+            print(f'please enter a valid person name, check the {textFile} file for exact syntax')'''
