@@ -9,10 +9,8 @@ from letterGenerator import api_message as api_message
 
 CLIENT_FILE = 'GradAccount.json'
 SCOPES = ['https://www.googleapis.com/auth/cloud-platform', 'https://www.googleapis.com/auth/drive']
-creds = None
 
 def token():
-
 
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)

@@ -3,7 +3,7 @@
 import os
 import random
 
-textFile = '\senders.txt'
+textFile = '\\Graduation Card Automation\\senders.txt'
 
 def addGifts():
     gifts = {}
