@@ -1,14 +1,16 @@
 import os
+import math
 
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-from letterGenerator import api_message as api_message
 
 CLIENT_FILE = 'GradAccount.json'
 SCOPES = ['https://www.googleapis.com/auth/cloud-platform', 'https://www.googleapis.com/auth/drive']
+id = ''
+creds = None
 
 def token():
 
@@ -27,6 +29,7 @@ def token():
 token()
 
 def doc_id(title):
+    global id
 
     if os.path.exists('token.json'):
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
@@ -89,10 +92,21 @@ def doc_pagebreak(id):
 
     result = docs_service.documents().batchUpdate(documentId = id, body={'requests': requests}).execute()
 
-increment = 0
-for message in api_message:
-    increment += 1
-    doc_content(message, id)
-    if increment > 3:
+def main(messageToPrint):
+    if messageToPrint == []:
+        if os.path.exists('token.json'):
+            creds = Credentials.from_authorized_user_file('token.json', SCOPES)
+        drive_service = build('drive', 'v3', credentials=creds)
+        response = drive_service.files().delete(fileId=id).execute()
+    else:
         increment = 0
-        doc_pagebreak(id)
+        for message in messageToPrint:
+            increment += 1
+            messageToAPI = f'\n{message}\n'
+            doc_content(messageToAPI, id)
+
+            verticalHeight = messageToAPI.count('\n')
+                    
+            if increment > round(42/verticalHeight):
+                increment = 0
+                doc_pagebreak(id)
